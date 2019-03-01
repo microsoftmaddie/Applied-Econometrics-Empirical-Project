@@ -1,0 +1,112 @@
+
+. set more off
+
+. 
+. *import processed data
+. 
+. *summarize all variables
+. summarize approve
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     approve |        522    43.09291    3.284157         34         52
+
+. summarize shutdownbinary
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+shutdownbi~y |        522    .3199234     .466894          0          1
+
+. summarize shutdownmagnitude
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+shutdownma~e |        522    6.421456    10.81118          0         35
+
+. summarize preshutdown
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ preshutdown |        522    .4367816    .4964631          0          1
+
+. summarize postshutdownbinary
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+postshutdo~y |        522     .243295    .4294833          0          1
+
+. summarize postshutdownmagnitude
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+postshutdo~e |        522    3.465517    7.192163          0         30
+
+. summarize unemployment
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+unemployment |        522     3.11954    1.542887          0          4
+
+. summarize tweets
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      tweets |        522    .1130268    .3169293          0          1
+
+. summarize taxation
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+    taxation |        522    .4942529    .5004466          0          1
+
+. summarize stocks
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+      stocks |        522    24669.46    953.8633    21792.2   26191.22
+
+. summarize legislation
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+ legislation |        522    .2183908    .4135504          0          1
+
+. 
+. twoway(scatter approve stocks)(lfit approve stocks),title("Scatterplot of Sto
+> cks")ytitle("approve")xtitle("stocks")
+
+. 
+. rvfplot // residual plot graph
+
+. reg approve shutdownbinary shutdownmagnitude postshutdownbinary postshutdownm
+> agnitude stocks tweets unemployment taxation legislation, robust
+
+Linear regression                               Number of obs     =        522
+                                                F(9, 512)         =      11.01
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.1376
+                                                Root MSE          =     3.0765
+
+------------------------------------------------------------------------------
+             |               Robust
+     approve |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+shutdownbi~y |  -.7666709   1.016527    -0.75   0.451    -2.763747    1.230406
+shutdownma~e |  -.1140992   .0372558    -3.06   0.002    -.1872922   -.0409061
+postshutdo~y |   -3.99138    1.08039    -3.69   0.000    -6.113922   -1.868838
+postshutdo~e |   .0874235   .0551101     1.59   0.113    -.0208462    .1956933
+      stocks |   .0002214   .0002674     0.83   0.408     -.000304    .0007468
+      tweets |   .3218057   .4002966     0.80   0.422    -.4646202    1.108232
+unemployment |  -.1680904    .255634    -0.66   0.511     -.670311    .3341301
+    taxation |   -1.14947   .8589554    -1.34   0.181    -2.836981    .5380404
+ legislation |   .2074466   .4480818     0.46   0.644    -.6728586    1.087752
+       _cons |   40.28795   6.956279     5.79   0.000     26.62159    53.95432
+------------------------------------------------------------------------------
+
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\Users\vw7\Downloads\empiricalprojectlog.log
+  log type:  text
+ closed on:   1 Mar 2019, 14:30:05
+-------------------------------------------------------------------------------
